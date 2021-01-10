@@ -1,6 +1,6 @@
 (() => {
   // 変数宣言
-  let a, b, d, e, f, p, z;
+  let a, b, d, e, z;
 
   // document.getElementByIdをローカル変数に
   b = function (s) {
@@ -17,7 +17,7 @@
   const gl = $canvas.getContext("webgl");
 
   // プログラムオブジェクトの生成
-  p = gl.createProgram();
+  const program = gl.createProgram();
 
   // シェーダ生成関数
   const h = (i, glsl) => {
@@ -31,25 +31,25 @@
     gl.compileShader(shaderObj);
 
     // シェーダのアタッチ
-    gl.attachShader(p, shaderObj);
+    gl.attachShader(program, shaderObj);
 
     // ログをリターン
     return gl.getShaderInfoLog(shaderObj);
   };
 
   // シェーダのコンパイルとリンク
-  if (!h(0, b("vs").text) && !h(1, b("fs").text)) gl.linkProgram(p);
+  if (!h(0, b("vs").text) && !h(1, b("fs").text)) gl.linkProgram(program);
 
   // シェーダのリンクステータスをチェック
-  e = gl.getProgramParameter(p, gl.LINK_STATUS);
+  e = gl.getProgramParameter(program, gl.LINK_STATUS);
 
   // プログラムオブジェクトの有効化
-  gl.useProgram(p);
+  gl.useProgram(program);
 
   // uniformLocation格納用にオブジェクトを定義
   const uniform = {
-    time: gl.getUniformLocation(p, "time"),
-    resolution: gl.getUniformLocation(p, "resolution"),
+    time: gl.getUniformLocation(program, "time"),
+    resolution: gl.getUniformLocation(program, "resolution"),
   };
 
   // VBO用のバッファオブジェクトを生成
@@ -63,7 +63,7 @@
   );
 
   // attributeロケーション取得
-  a = gl.getAttribLocation(p, "position");
+  a = gl.getAttribLocation(program, "position");
 
   // attribute有効化
   gl.enableVertexAttribArray(a);
