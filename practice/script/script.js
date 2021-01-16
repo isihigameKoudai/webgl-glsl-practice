@@ -76,7 +76,7 @@
   z = new Date().getTime();
 
   // 無名関数でメインルーチンを実行
-  (function () {
+  (function render() {
     // シェーダのリンクに失敗していたら実行しない
     if (!e) return;
 
@@ -96,13 +96,14 @@
     // uniform変数をプッシュ
     gl.uniform1f(uniform.time, d);
     gl.uniform2fv(uniform.resolution, [x, y]);
+    console.log(uniform);
 
     // プリミティブのレンダリング
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     gl.flush();
 
     // 再起
-    requestAnimationFrame(arguments.callee);
+    requestAnimationFrame(render);
   })();
 
   // keydownに登録する関数
