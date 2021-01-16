@@ -96,7 +96,6 @@
     // uniform変数をプッシュ
     gl.uniform1f(uniform.time, d);
     gl.uniform2fv(uniform.resolution, [x, y]);
-    console.log(uniform);
 
     // プリミティブのレンダリング
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
